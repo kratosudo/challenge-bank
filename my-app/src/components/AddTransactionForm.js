@@ -1,14 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 
-function AddTransactionForm() {
+const AddTransactionForm = ({ onAddTransaction}) => {
+  const [formData, setFormData] = useState ({
+    date:"",
+    description:"",
+    category:"",
+    amount:"",
+  });
+  //handle form input changes
+  const handleChange =(e) => {
+    setFormData({
+      ...formData, [e.target.name]:
+      e.target.value,
+    });
+  };
+  //handle form submission
+  const handleSubmit =(e) => {
+    e.preventDefault();
+    onAddTransaction(formData);
+    setFormData({
+      date: "",
+      description: "",
+      category: "",
+      amount: "",
+    });
+  }
   return (
     <div className="ui segment">
-      <form className="ui form">
+      <form onSubmit={handleSubmit} className="ui form">
         <div className="inline fields">
-          <input type="date" name="date" />
-          <input type="text" name="description" placeholder="Description" />
-          <input type="text" name="category" placeholder="Category" />
-          <input type="number" name="amount" placeholder="Amount" step="0.01" />
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            placeholder="Date"
+            required
+          />
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Description"
+            required
+          />
+          <input
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            placeholder="Category"
+            required
+          />
+          <input
+            type="number"
+            name="amount"
+            value={formData.amount}
+            onChange={handleChange}
+            placeholder="Amount"
+            required
+          />
         </div>
         <button className="ui button" type="submit">
           Add Transaction

@@ -3,24 +3,23 @@ import Transaction from "./Transaction";
 
 function TransactionsList({ transaction }) {
   return (
-    <table className="ui celled striped padded table">
-      <tbody>
+    <table>
+      <thead>
         <tr>
-          <th>
-            <h3 className="ui center aligned header">Date</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Description</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Category</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Amount</h3>
-          </th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Amount</th>
         </tr>
-        {transaction.map((transaction) => (
-          <Transaction key={transaction.id} transaction={transaction} />
+      </thead>
+      <tbody>
+        {transactions.map((transaction) => (
+          <tr key={transaction.id}>
+            <td>{transaction.date}</td>
+            <td>{transaction.description}</td>
+            <td>{transaction.category}</td>
+            <td>{transaction.amount}</td>
+          </tr>
         ))}
       </tbody>
     </table>
